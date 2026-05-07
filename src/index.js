@@ -7,6 +7,12 @@ const postal = document.querySelector("#postal");
 const password = document.querySelector("#password");
 const passwordConf = document.querySelector("#password-conf");
 
+const errorEmail = document.querySelector(".error-email");
+const errorCountry = document.querySelector(".error-country");
+const errorPostal = document.querySelector(".error-postal");
+const errorPassword = document.querySelector(".error-password");
+const errorPasswordConf = document.querySelector(".error-password-conf");
+
 email.addEventListener("input", isEmailValid);
 country.addEventListener("input", isCountryValid);
 postal.addEventListener("input", isPostalCodeValid);
@@ -27,23 +33,28 @@ form.addEventListener("submit", (event) => {
   }
 });
 
+function showError(node) {
+  node.classList.add("active");
+}
+
+function clearError(node) {
+  node.classList.remove("active");
+  node.textContent = "";
+  return true;
+}
+
 function isEmailValid() {
-  const errorEmail = document.querySelector(".error-email");
-  errorEmail.classList.add("active");
+  showError(errorEmail);
   if (email.validity.typeMismatch || email.validity.valueMissing) {
     errorEmail.textContent = "I need email like example@example.com";
-
     return false;
   } else {
-    errorEmail.classList.remove("active");
-    errorEmail.textContent = "";
-    return true;
+    return clearError(errorEmail);
   }
 }
 
 function isCountryValid() {
-  const errorCountry = document.querySelector(".error-country");
-  errorCountry.classList.add("active");
+  showError(errorCountry);
   if (country.validity.patternMismatch) {
     errorCountry.textContent = "Hello there is no numbers in country name :/";
 
@@ -52,18 +63,14 @@ function isCountryValid() {
     const inputLength = country.value.length;
     const inputMinLength = country.minLength;
     errorCountry.textContent = `Country should have min ${inputMinLength} chars, add ${inputMinLength - inputLength} more`;
-
     return false;
   } else {
-    errorCountry.classList.remove("active");
-    errorCountry.textContent = "";
-    return true;
+    clearError(errorCountry);
   }
 }
 
 function isPostalCodeValid() {
-  const errorPostal = document.querySelector(".error-postal");
-  errorPostal.classList.add("active");
+  showError(errorPostal);
   if (postal.validity.patternMismatch) {
     errorPostal.textContent = `Hello there are no letters in postal code :/`;
 
@@ -74,36 +81,28 @@ function isPostalCodeValid() {
     errorPostal.textContent = `Hey, I need exactly ${inputMinLength} digits, add ${inputMinLength - inputLength} more`;
     return false;
   } else {
-    errorPostal.classList.remove("active");
-    errorPostal.textContent = "";
-    return true;
+    clearError(errorPostal);
   }
 }
 
 function isPasswordValid() {
-  const errorPassword = document.querySelector(".error-password");
-  errorPassword.classList.add("active");
+  showError(errorPassword);
   if (password.validity.tooShort) {
     const inputLength = password.value.length;
     const inputMinLength = password.minLength;
     errorPassword.textContent = `Hey, I need minimum length of ${inputMinLength}, add ${inputMinLength - inputLength} more`;
     return false;
   } else {
-    errorPassword.classList.remove("active");
-    errorPassword.textContent = "";
-    return true;
+    clearError(errorPassword);
   }
 }
 
 function isPasswordConfValid() {
-  const errorPasswordConf = document.querySelector(".error-password-conf");
-  errorPasswordConf.classList.add("active");
+  showError(errorPasswordConf);
   if (passwordConf.value !== password.value) {
     errorPasswordConf.textContent = "Passwords do not match";
     return false;
   } else {
-    errorPasswordConf.classList.remove("active");
-    errorPasswordConf.textContent = "";
-    return true;
+    clearError(errorPasswordConf);
   }
 }
