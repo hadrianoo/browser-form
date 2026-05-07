@@ -3,7 +3,54 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Form</title>
   </head>
-  <body></body>
+  <body>
+    <form action="" novalidate>
+      <div>
+        <label for="email">Email:</label
+        ><input type="email" id="email" name="email" required />
+        <div class="error-email" aria-live="polite"></div>
+      </div>
+      <div>
+        <label for="country">Country:</label
+        ><input
+          type="text"
+          id="country"
+          name="country"
+          minlength="4"
+          pattern="[a-zA-Z]+"
+          required
+        />
+        <div class="error-country" aria-live="polite"></div>
+      </div>
+      <div>
+        <label for="postal">Postal Code:</label
+        ><input
+          type="text"
+          id="postal"
+          name="postal"
+          pattern="\d\d-\d\d\d"
+          required
+        />
+        <div class="epostal-email" aria-live="polite"></div>
+      </div>
+      <div>
+        <label for="password">Password:</label
+        ><input type="password" id="password" name="password" required />
+        <div class="error-password" aria-live="polite"></div>
+      </div>
+      <div>
+        <label for="password-conf">Confirm Password:</label
+        ><input
+          type="password"
+          id="password-conf"
+          name="password-conf"
+          required
+        />
+        <div class="error-password-conf" aria-live="polite"></div>
+      </div>
+      <div><button type="submit">SUBMIT</button></div>
+    </form>
+  </body>
 </html>
