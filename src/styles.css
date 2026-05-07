@@ -17,7 +17,7 @@ button {
   margin-top: 10px;
 }
 
-input:invalid {
+input:user-invalid {
   background-color: rgb(235, 73, 73);
 }
 
